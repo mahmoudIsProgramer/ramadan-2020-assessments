@@ -12,7 +12,10 @@
   <body>
     <div class="container my-5">
       <div class="formContainer my-5">
-        <form action="" method="POST">
+        <div class="alert alert-success">
+          <p id="results"></p>
+        </div>
+        <form action="" method="POST"  id="video-request-form" >
           <div class="row">
             <div class="col-md">
               <div class="form-group">
@@ -85,7 +88,7 @@
             </div>
           </div>
 
-          <button type="submit" class="btn btn-success mt-3">
+          <button type="submit"  class="btn btn-success mt-3" id="add-video-request-btn">
             Send video request
           </button>
         </form>
@@ -125,5 +128,10 @@
         </div>
       </div>
     </div>
+    <script>
+      window.baseUrl = 'http://localhost:7777/' ; 
+    </script>
+
+    <script src="add-video-request.js"></script>
   </body>
 </html>
