@@ -3,11 +3,8 @@ addEventListener('DOMContentLoaded', (event) => {
     let addVideoRequestBtnElm = document.getElementById("add-video-request-btn");
     let addVideoRequestFormElm = document.getElementById("video-request-form");
     let videosList = document.querySelector('#videosList');
-    // let voteDownBtnElm = document.querySelector('.vote-down-btn');
 
     addVideoRequestBtnElm.onclick = addVideoRequest;
-    // voteUpBtnElm.addEventListener("click", function(){ alert("Hello World!"); });
-
 
     function renderSingleVideoRequest(videoRequest) {
 
@@ -24,9 +21,9 @@ addEventListener('DOMContentLoaded', (event) => {
                         </p>
                     </div>
                     <div class="d-flex flex-column text-center">
-                        <a class="btn btn-link vote-up-btn" data-id="${videoRequest.id}">🔺</a>
-                        <h3>0</h3>
-                        <a class="btn btn-link vote-down-btn">🔻</a>
+                        <a class="btn btn-link vote-up-btn" id="votes_ups_${videoRequest._id}" >🔺</a>
+                        <h3 id="score_vote_${videoRequest._id}">${videoRequest.votes.ups - videoRequest.votes.downs}</h3>
+                        <a class="btn btn-link vote-down-btn" id="votes_downs_${videoRequest._id}">🔻</a>
                     </div>
                 </div>
                 <div class="card-footer d-flex flex-row justify-content-between">
@@ -48,6 +45,37 @@ addEventListener('DOMContentLoaded', (event) => {
     function renderVideoRequests(videoRequests) {
         videoRequests.forEach(video => {
             videosList.appendChild(renderSingleVideoRequest(video));
+            voteElementAddClickEvent(video._id);
+        });
+    }
+
+    function voteElementAddClickEvent(id){
+        const voteUpsElm = document.getElementById(`votes_ups_${id}`);
+        const voteDownsElm = document.getElementById(`votes_downs_${id}`);
+        const scoreVoteElm = document.getElementById(`score_vote_${id}`);
+        
+        voteUpsElm.addEventListener('click', (e) => {
+            fetch(`${window.baseUrl}video-request/vote`, {
+                method: 'PUT',
+                headers: { 'content-Type': 'application/json' },
+                body: JSON.stringify({ id: id, vote_type: 'ups' })
+            })
+                .then((blob) => blob.json())
+                .then((video) => {
+                    scoreVoteElm.innerText = video.votes.ups - video.votes.downs;
+                });
+        });
+
+        voteDownsElm.addEventListener('click', (e) => {
+            fetch(`${window.baseUrl}video-request/vote`, {
+                method: 'PUT',
+                headers: { 'content-Type': 'application/json' },
+                body: JSON.stringify({ id: id, vote_type: 'downs' })
+            })
+                .then((blob) => blob.json())
+                .then((video) => {
+                    scoreVoteElm.innerText = video.votes.ups - video.votes.downs;
+                });
         });
     }
 
@@ -89,6 +117,8 @@ addEventListener('DOMContentLoaded', (event) => {
                     .then((blob) => blob.json())
                     .then((data) => {
                         videosList.prepend(renderSingleVideoRequest(data[0]));
+                        voteElementAddClickEvent(data[0]._id);
+
                     });
 
             });
@@ -99,9 +129,5 @@ addEventListener('DOMContentLoaded', (event) => {
     }
 
     loadVideoRequest()
-    let voteUpBtnElm = document.querySelector('.vote-up-btn');
-
-    console.log(voteUpBtnElm);
-
 
 });
