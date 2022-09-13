@@ -1,102 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Semicolon | video request</title>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-  </head>
-  <body>
-    <div class="container my-5">
-      <div class="formContainer my-5">
-        <div class="alert alert-success">
-          <p id="results"></p>
-        </div>
-        <form action="" method="POST"  id="video-request-form" >
-          <div class="row">
-            <div class="col-md">
-              <div class="form-group">
-                <label for="author_name">Your name *</label>
-                <input
-                  class="form-control"
-                  name="author_name"
-                  placeholder="Write your name here"
-                />
-              </div>
-            </div>
-            <div class="col-md">
-              <div class="form-group">
-                <label for="author_email">Your email *</label>
-                <input
-                  class="form-control"
-                  name="author_email"
-                  placeholder="Write your email here"
-                />
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div class="row">
-            <div class="col-md">
-              <div class="form-group">
-                <label for="topic_title">Topic *</label>
-                <input
-                  class="form-control"
-                  name="topic_title"
-                  placeholder="Write your suggested topic here"
-                />
-              </div>
-            </div>
-            <div class="col-md">
-              <div class="form-group">
-                <label for="target_level">Target level</label>
-                <select
-                  class="form-control"
-                  name="target_level"
-                  placeholder="Write your name here"
-                >
-                  <option value="begineer">Beginner</option>
-                  <option value="medium">Medium</option>
-                  <option value="advanced">Advanced</option>
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md">
-              <div class="form-group">
-                <label for="topic_details">More details *</label>
-                <textarea
-                  class="form-control"
-                  name="topic_details"
-                  placeholder="Write your topic in more details here"
-                ></textarea>
-              </div>
-            </div>
-            <div class="col-md">
-              <div class="form-group">
-                <label for="expected_result">Expected results</label>
-                <textarea
-                  class="form-control"
-                  name="expected_result"
-                  placeholder="Write what do you expect after watching this video"
-                ></textarea>
-              </div>
-            </div>
-          </div>
 
-          <button type="submit"  class="btn btn-success mt-3" id="add-video-request-btn">
-            Send video request
-          </button>
-        </form>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Semicolon | video request</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+
+<body>
+  <div class="container my-5">
+    <div class="formContainer my-5">
+      <div class="alert alert-success">
+        <p id="results"></p>
       </div>
-      <hr />
-      <h1 class="mb-4">List of requested videos</h1>
-      <div id="videosList">
-        <!-- <div class="card mb-3">
+      <form action="" method="POST" id="video-request-form">
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group">
+              <label for="author_name">Your name *</label>
+              <input class="form-control" name="author_name" placeholder="Write your name here" />
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="author_email">Your email *</label>
+              <input class="form-control" name="author_email" placeholder="Write your email here" />
+            </div>
+          </div>
+        </div>
+        <hr />
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group">
+              <label for="topic_title">Topic *</label>
+              <input class="form-control" name="topic_title" placeholder="Write your suggested topic here" />
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="target_level">Target level</label>
+              <select class="form-control" name="target_level" placeholder="Write your name here">
+                <option value="begineer">Beginner</option>
+                <option value="medium">Medium</option>
+                <option value="advanced">Advanced</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md">
+            <div class="form-group">
+              <label for="topic_details">More details *</label>
+              <textarea class="form-control" name="topic_details"
+                placeholder="Write your topic in more details here"></textarea>
+            </div>
+          </div>
+          <div class="col-md">
+            <div class="form-group">
+              <label for="expected_result">Expected results</label>
+              <textarea class="form-control" name="expected_result"
+                placeholder="Write what do you expect after watching this video"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-3" id="add-video-request-btn">
+          Send video request
+        </button>
+      </form>
+    </div>
+    <hr />
+    <h1 class="mb-4">List of requested videos</h1>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="col-md">
+          <p>sort by </p>
+          <div class="form-check">
+            <input class="form-check-input sorting_type" type="radio" name="flexRadioDefault" value="new_first" id="new_first">
+            <label class="form-check-label" for="new_first">
+              New First 
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input sorting_type" type="radio" name="flexRadioDefault" value="top_voted" id="top_voted" checked>
+            <label class="form-check-label" for="top_voted">
+              Top  Voted First
+            </label>
+          </div>
+        </div>
+        <div class="col-md">
+        </div>
+      </div>
+    </div>
+    <div id="videosList">
+      <!-- <div class="card mb-3">
           <div class="card-body d-flex justify-content-between flex-row">
             <div class="d-flex flex-column">
               <h3>Dummy Topic title</h3>
@@ -126,11 +124,12 @@
             </div>
           </div>
         </div> -->
-      </div>
     </div>
-    <script>
-      window.baseUrl = 'http://localhost:7777/' ; 
-    </script>
-    <script src="client.js"></script>
-  </body>
+  </div>
+  <script>
+    window.baseUrl = 'http://localhost:7777/'; 
+  </script>
+  <script src="client.js"></script>
+</body>
+
 </html>

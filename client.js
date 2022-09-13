@@ -3,6 +3,13 @@ addEventListener('DOMContentLoaded', (event) => {
     let addVideoRequestBtnElm = document.getElementById("add-video-request-btn");
     let addVideoRequestFormElm = document.getElementById("video-request-form");
     let videosList = document.querySelector('#videosList');
+    let sortingType = document.querySelectorAll('.sorting_type');
+
+    sortingType.forEach((elm) => {
+        elm.addEventListener('click', () => {
+            loadVideoRequest(elm.value);
+        });
+    });
 
     addVideoRequestBtnElm.onclick = addVideoRequest;
 
@@ -49,11 +56,11 @@ addEventListener('DOMContentLoaded', (event) => {
         });
     }
 
-    function voteElementAddClickEvent(id){
+    function voteElementAddClickEvent(id) {
         const voteUpsElm = document.getElementById(`votes_ups_${id}`);
         const voteDownsElm = document.getElementById(`votes_downs_${id}`);
         const scoreVoteElm = document.getElementById(`score_vote_${id}`);
-        
+
         voteUpsElm.addEventListener('click', (e) => {
             fetch(`${window.baseUrl}video-request/vote`, {
                 method: 'PUT',
@@ -79,8 +86,8 @@ addEventListener('DOMContentLoaded', (event) => {
         });
     }
 
-    function loadVideoRequest() {
-        fetch(`${window.baseUrl}video-request`)
+    function loadVideoRequest(sorting = 'new_first') {
+        fetch(`${window.baseUrl}video-request?sorting=${sorting}`)
             .then((blob) => blob.json())
             .then((data) => {
                 renderVideoRequests(data);
